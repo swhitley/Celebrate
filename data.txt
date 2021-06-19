@@ -1,0 +1,14 @@
+[
+	{
+		"group": "5",
+		"photo": "https://tile.loc.gov/image-services/iiif/service:music:musgottlieb:musgottlieb-00151:ver01:0001/full/pct:25.0/0/default.jpg",
+		"name": "Louis Armstrong",
+		"title": "Satchmo'"
+	},
+	{
+		"group": "5",
+		"photo": "https://tile.loc.gov/image-services/iiif/service:music:musgottlieb:musgottlieb-04291:ver01:0001/full/pct:25.0/0/default.jpg",
+		"name": "Lena Horne",
+		"title": "Jazz Woman"
+	}
+]

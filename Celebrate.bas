@@ -24,6 +24,7 @@ Sub DataLoad()
     Dim people As Object
     Dim person As Object
     Dim title As String
+    Dim fileName As String
   
  
     'Get the slide data from the slide notes
@@ -36,6 +37,13 @@ Sub DataLoad()
         End If
         If shp.Type = msoTable Then
             Set tbl = shp.Table
+        End If
+        If shp.Type = mso3DModel Then
+            fileName = ActivePresentation.Path & "/" & shp.ActionSettings.Item(1).Hyperlink.Address
+            Open fileName For Binary As #1
+                data = Space$(LOF(1))
+            Get #1, , data
+            Close #1
         End If
     Next
     
