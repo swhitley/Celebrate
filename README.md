@@ -1,6 +1,9 @@
 # Celebrate
 PowerPoint macro for generating work anniversary and birthday slides.
 
+Celebrate is compatible with Workday®
+It is not sponsored, affiliated with, or endorsed by Workday.
+
 ![image](https://user-images.githubusercontent.com/413552/122630517-309abe80-d079-11eb-8882-364dc13029ee.png)
 
 ## Sample Data
@@ -24,3 +27,8 @@ PowerPoint macro for generating work anniversary and birthday slides.
 ![image](https://user-images.githubusercontent.com/413552/122631716-68f2ca80-d082-11eb-907f-4b5611056eed.png)
 
 
+## Workday RaaS Configuration
+
+Create a Workday report to generate the json data for Celebrate.
+
+![image](https://user-images.githubusercontent.com/413552/122632795-e7069f80-d089-11eb-86a7-005757839e99.png)
