@@ -30,17 +30,17 @@ This is an example of the json format that Celebrate can process.  Celebrate als
 * `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg).  
   
   Note: If you are viewing the text version of this README file, the backslashes are escaped using backslashes. `Double-backslashes` means 2 sequential backslashes.
-  
-* `smart quotes` - Straight quotes (') in the slide notes may be autocorrected to smart quotes if any editing is performed in the slide notes. The change will result in data errors. It is recommended that any changes be made in a text editor. After editing in a text editor, copy-and-paste the data into the slide notes, replacing any previous data. 
 
 ## Control Slide
 Run the macro from this slide.
 * Change the `values` in the `options` table to change titles, labels, and colors.
-* Paste the Json into the slide notes.
 * Enter presentation mode.
+* Click the document image to open the `data.txt` file.
+* Paste the Json into `data.txt`. Save and close the file.
 * Click the `Run` button.
 
-![image](https://user-images.githubusercontent.com/413552/122631716-68f2ca80-d082-11eb-907f-4b5611056eed.png)
+![image](https://user-images.githubusercontent.com/413552/122657872-0f3ede80-d11c-11eb-85be-d302dc764581.png)
+
 
 
 ## Workday RaaS Configuration
