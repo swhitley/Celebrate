@@ -46,7 +46,7 @@ Sub DataLoad()
     
     btnRun.TextFrame.TextRange.Text = "Processing..."
 
-    'Parse the json data.  See TODO: for the required data format.
+    'Parse the json data.  See https://github.com/swhitley/Celebrate for the required data format.
     Set people = WebHelpers.ParseJson(data)
     On Error Resume Next
         Set people = people.Item("Report_Entry")
@@ -98,7 +98,7 @@ Sub DataLoad()
 End Sub
 Sub UpdateCheck()
 
-    ActivePresentation.FollowHyperlink ""
+    ActivePresentation.FollowHyperlink "https://github.com/swhitley/Celebrate"
     
 End Sub
 Sub SlideBuild(slideItems, itemCount)
