@@ -21,3 +21,6 @@ PowerPoint macro for generating work anniversary and birthday slides.
 ]
 ```
 
+![image](https://user-images.githubusercontent.com/413552/122631716-68f2ca80-d082-11eb-907f-4b5611056eed.png)
+
+
