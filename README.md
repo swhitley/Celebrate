@@ -1,7 +1,7 @@
 # Celebrate
 PowerPoint macro for generating work anniversary and birthday slides.
 
-Celebrate is compatible with Workday®. See information on creating the json with Workday RaaS below.
+Celebrate is compatible with Workday®'s RaaS json output. See information on creating the json with Workday RaaS below.
 
 ![image](https://user-images.githubusercontent.com/413552/122630517-309abe80-d079-11eb-8882-364dc13029ee.png)
 
@@ -26,6 +26,20 @@ This is an example of the json format that Celebrate can process.  Celebrate als
 ]
 ```
 
+## About the Json Data
+* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg).  
+  
+  Note: If you are viewing the text version of this README file, the backslashes are escaped using backslashes. `Double-backslashes` means 2 sequential backslashes.
+  
+* `smart quotes` - Straight quotes (') in the slide notes may be autocorrected to smart quotes if any editing is performed in the slide notes. The change will result in data errors. It is recommended that any changes be made in a text editor. After editing in a text editor, copy-and-paste the data into the slide notes, replacing any previous data. 
+
+## Control Slide
+Run the macro from this slide.
+* Change the `values` in the `options` table to change titles, labels, and colors.
+* Paste the Json into the slide notes.
+* Enter presentation mode.
+* Click the `Run` button.
+
 ![image](https://user-images.githubusercontent.com/413552/122631716-68f2ca80-d082-11eb-907f-4b5611056eed.png)
 
 
@@ -42,6 +56,9 @@ Create a Workday report to generate the json data for Celebrate.
 ![image](https://user-images.githubusercontent.com/413552/122633079-80828100-d08b-11eb-923a-753a884192db.png)
 
 
+## Credits
+WebHelpers
+(c) Tim Hall - https://github.com/VBA-tools/VBA-Web (MIT License)
 
 Celebrate is compatible with Workday®
 It is not sponsored, affiliated with, or endorsed by Workday.
