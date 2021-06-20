@@ -1,5 +1,5 @@
 ''
-' Celebrate v1.0.0
+' Celebrate v1.1.1
 ' (c) Shannon Whitley - https://github.com/swhitley/Celebrate
 '
 ' Generate slides for typical celebrations such as anniversaries and birthdays.
@@ -25,11 +25,8 @@ Sub DataLoad()
     Dim person As Object
     Dim title As String
     Dim fileName As String
-  
- 
-    'Get the slide data from the slide notes
-    data = ActivePresentation.Slides(1).NotesPage.Shapes.Placeholders(2).TextFrame.TextRange.Text
-    
+    Dim filePermissionCandidates
+     
     'Loop through the shapes to gather input
     For Each shp In ActivePresentation.Slides(1).Shapes
         If shp.AlternativeText = "Run" Then
@@ -40,6 +37,10 @@ Sub DataLoad()
         End If
         If shp.Type = mso3DModel Then
             fileName = ActivePresentation.Path & "/" & shp.ActionSettings.Item(1).Hyperlink.Address
+            #If Mac Then
+                filePermissionCandidates = Array(fileName, ActivePresentation.Path & "/temp.jpg")
+                GrantAccessToMultipleFiles (filePermissionCandidates)
+            #End If
             Open fileName For Binary As #1
                 data = Space$(LOF(1))
             Get #1, , data
