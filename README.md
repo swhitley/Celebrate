@@ -5,6 +5,11 @@ Celebrate is compatible with Workday®'s RaaS json output. See information on cr
 
 ![image](https://user-images.githubusercontent.com/413552/122630517-309abe80-d079-11eb-8882-364dc13029ee.png)
 
+## Installation
+* View the latest release - https://github.com/swhitley/Celebrate/releases/latest
+* Download `Celebrate.pptm` and `data.txt` to the same directory.  Open `Celebrate.pptm` and follow the instructions.
+
+
 ## Sample Data
 
 This is an example of the json format that Celebrate can process.  Celebrate also recognizes the json that is produced by Workday's Reporting as a Service (RaaS).
