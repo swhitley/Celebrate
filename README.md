@@ -32,7 +32,8 @@ This is an example of the json format that Celebrate can process.  Celebrate als
 ```
 
 ## About the Json Data
-* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg).  
+* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg).
+* base64-encoded image data may only work on Windows at this time.  
   
   Note: If you are viewing the text version of this README file, you will see four backslashes instead of two. This is due to markdown requirements for this file. Only use two backslashes in the data.
 
