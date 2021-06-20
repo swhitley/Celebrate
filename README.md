@@ -65,6 +65,7 @@ Create a Workday report to generate the json data for Celebrate.
 WebHelpers
 (c) Tim Hall - https://github.com/VBA-tools/VBA-Web (MIT License)
 
-Celebrate is compatible with Workday®
-It is not sponsored, affiliated with, or endorsed by Workday.
+Thank you to [Ellie Khorasani](https://www.linkedin.com/in/ellie-khorasani-a33581bb) for her testing feedback, contributions, and support.
+
+Celebrate is compatible with Workday®. It is not sponsored, affiliated with, or endorsed by Workday.
 
