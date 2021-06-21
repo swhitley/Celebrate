@@ -1,5 +1,5 @@
 ''
-' Celebrate v1.2.0
+' Celebrate v1.2.2
 ' (c) Shannon Whitley - https://github.com/swhitley/Celebrate
 '
 ' Generate slides for typical celebrations such as anniversaries and birthdays.
@@ -8,6 +8,7 @@
 Option Explicit
     Dim slideTitle As String
     Dim groupLabel As String
+    Dim groupLabelOne As String
     Dim groupLabelZero As String
     Dim subColor As ColorFormat
     Dim tempFile
@@ -54,14 +55,15 @@ Sub DataLoad()
     
     slideTitle = tbl.Cell(2, 2).Shape.TextFrame.TextRange.Text
     groupLabel = tbl.Cell(3, 2).Shape.TextFrame.TextRange.Text
-    groupLabelZero = tbl.Cell(4, 2).Shape.TextFrame.TextRange.Text
-    Set subColor = tbl.Cell(5, 2).Shape.TextFrame.TextRange.Font.Color
+    groupLabelOne = tbl.Cell(4, 2).Shape.TextFrame.TextRange.Text
+    groupLabelZero = tbl.Cell(5, 2).Shape.TextFrame.TextRange.Text
     
     btnRun.TextFrame.TextRange.Text = "Processing..."
 
     'Parse the json data.  See https://github.com/swhitley/Celebrate for the required data format.
     Set people = WebHelpers.ParseJson(data)
     On Error Resume Next
+        'Workday RaaS
         Set people = people.Item("Report_Entry")
     Err.Number = 0
     
@@ -143,29 +145,22 @@ Sub SlideBuild(slideItems, itemCount)
 
     
     'Add a new slide
-    Set sld = ActivePresentation.Slides.AddSlide(ActivePresentation.Slides.Count + 1, ActivePresentation.Slides(1).CustomLayout)
-
-    'Title
-    sld.Shapes.title.TextFrame.TextRange.Text = slideTitle
-    
-    'Subtitle
-    Set subtitle = sld.Shapes.AddTextbox(msoTextOrientationHorizontal, 65, 8, 800, 200)
+    Set sld = ActivePresentation.Slides.AddSlide(ActivePresentation.Slides.Count + 1, ActivePresentation.SlideMaster.CustomLayouts(ActivePresentation.SlideMaster.CustomLayouts.Count))
     
     group = slideItems(1, 1)
-    If group = "0" Then
+    If group = "0" Or group = "Zero" Then
         subtitleText = groupLabelZero
     Else
-        If group = "1" Then
-            subtitleText = group & " " & groupLabel
+        If group = "1" Or group = "One" Then
+            subtitleText = group & " " & groupLabelOne
         Else
-            subtitleText = group & " " & groupLabel & "s"
+            subtitleText = group & " " & groupLabel
         End If
     End If
     
-    subtitle.TextFrame.TextRange.Text = subtitleText
-    subtitle.TextFrame.TextRange.Font.Size = 36
-    subtitle.TextFrame.AutoSize = ppAutoSizeNone
-    subtitle.TextFrame.TextRange.Font.Color = subColor
+    'Title and Subtitle
+    sld.Shapes.Placeholders.Item(1).TextFrame.TextRange.Text = slideTitle
+    sld.Shapes.Placeholders.Item(2).TextFrame.TextRange.Text = subtitleText
     
     positions = Split(layout(itemCount - 1), ",")
     position = 0
