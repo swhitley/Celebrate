@@ -1,5 +1,5 @@
 ''
-' Celebrate v1.1.1
+' Celebrate v1.2.0
 ' (c) Shannon Whitley - https://github.com/swhitley/Celebrate
 '
 ' Generate slides for typical celebrations such as anniversaries and birthdays.
@@ -10,6 +10,8 @@ Option Explicit
     Dim groupLabel As String
     Dim groupLabelZero As String
     Dim subColor As ColorFormat
+    Dim tempFile
+    
 Sub DataLoad()
 
     Dim slideItems() As String
@@ -26,6 +28,8 @@ Sub DataLoad()
     Dim title As String
     Dim fileName As String
     Dim filePermissionCandidates
+    
+    tempFile = ActivePresentation.Path & "/temp.jpg"
      
     'Loop through the shapes to gather input
     For Each shp In ActivePresentation.Slides(1).Shapes
@@ -38,7 +42,7 @@ Sub DataLoad()
         If shp.Type = mso3DModel Then
             fileName = ActivePresentation.Path & "/" & shp.ActionSettings.Item(1).Hyperlink.Address
             #If Mac Then
-                filePermissionCandidates = Array(fileName, ActivePresentation.Path & "/temp.jpg")
+                filePermissionCandidates = Array(fileName, tempFile)
                 GrantAccessToMultipleFiles (filePermissionCandidates)
             #End If
             Open fileName For Binary As #1
@@ -89,7 +93,7 @@ Sub DataLoad()
         title = person("title")
         'Limit the title to 35 characters
         If Len(title) > 35 Then
-            title = left(title, 35) & "..."
+            title = Left(title, 35) & "..."
             title = Replace(title, ",...", "...")
         End If
         slideItems(itemCount, 4) = title
@@ -136,8 +140,7 @@ Sub SlideBuild(slideItems, itemCount)
     
     Dim imageFile As String
     Dim imageString As String
-    Dim tmpFile As String
-    tmpFile = ActivePresentation.Path & "/temp.jpg"
+
     
     'Add a new slide
     Set sld = ActivePresentation.Slides.AddSlide(ActivePresentation.Slides.Count + 1, ActivePresentation.Slides(1).CustomLayout)
@@ -174,11 +177,15 @@ Sub SlideBuild(slideItems, itemCount)
         If InStr(slideItems(ctr, 2), ":") > 0 Or InStr(slideItems(ctr, 2), ".") > 0 Then
             imageFile = slideItems(ctr, 2)
         Else
-            imageString = WebHelpers.Base64Decode(slideItems(ctr, 2))
-            Open tmpFile For Binary Access Write As #1
+            #If Mac Then
+                imageString = Base64Decode(slideItems(ctr, 2))
+            #Else
+                imageString = WebHelpers.Base64Decode(slideItems(ctr, 2))
+            #End If
+            Open tempFile For Binary Access Write As #1
             Put #1, , imageString
             Close #1
-            imageFile = tmpFile
+            imageFile = tempFile
         End If
         
         ' Oval with photo
@@ -201,3 +208,58 @@ Sub SlideBuild(slideItems, itemCount)
     Next
 
 End Sub
+
+' Decodes a base-64 encoded string (BSTR type).
+' 1999 - 2004 Antonin Foller, http://www.motobit.com
+' 1.01 - solves problem with Access And 'Compare Database' (InStr)
+Function Base64Decode(ByVal base64String)
+  'rfc1521
+  '1999 Antonin Foller, Motobit Software, http://Motobit.cz
+  Const Base64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+  Dim dataLength, sOut, groupBegin
+  
+  base64String = Replace(base64String, vbCrLf, "")
+  base64String = Replace(base64String, vbTab, "")
+  base64String = Replace(base64String, " ", "")
+  
+  dataLength = Len(base64String)
+  If dataLength Mod 4 <> 0 Then
+    Err.Raise 1, "Base64Decode", "Bad Base64 string."
+    Exit Function
+  End If
+  
+  
+  For groupBegin = 1 To dataLength Step 4
+    Dim numDataBytes, CharCounter, thisChar, thisData, nGroup, pOut
+    numDataBytes = 3
+    nGroup = 0
+    
+    For CharCounter = 0 To 3
+      
+      thisChar = Mid(base64String, groupBegin + CharCounter, 1)
+      
+      If thisChar = "=" Then
+        numDataBytes = numDataBytes - 1
+        thisData = 0
+      Else
+        thisData = InStr(1, Base64, thisChar, vbBinaryCompare) - 1
+      End If
+      If thisData = -1 Then
+        Err.Raise 2, "Base64Decode", "Bad character In Base64 string."
+        Exit Function
+      End If
+      
+      nGroup = 64 * nGroup + thisData
+    Next
+    
+    nGroup = Hex(nGroup)
+    
+    nGroup = String(6 - Len(nGroup), "0") & nGroup
+    
+    pOut = Chr(CByte("&H" & Mid(nGroup, 1, 2))) + Chr(CByte("&H" & Mid(nGroup, 3, 2))) + Chr(CByte("&H" & Mid(nGroup, 5, 2)))
+    
+    sOut = sOut & Left(pOut, numDataBytes)
+  Next
+  
+  Base64Decode = sOut
+End Function
