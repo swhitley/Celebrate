@@ -32,22 +32,26 @@ This is an example of the json format that Celebrate can process.  Celebrate als
 ```
 
 ## About the Json Data
-* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg).
-* base64-encoded image data may only work on Windows at this time.  
+* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg) -- or use single, forward slashes (/). 
   
-  Note: If you are viewing the text version of this README file, you will see four backslashes instead of two. This is due to markdown requirements for this file. Only use two backslashes in the data.
+Note: If you are viewing the text version of this README file, you will see four backslashes when referring to `double-backslashes`. This is due to markdown requirements. A double-backslash refers to two consecutive backslashes.
 
 ## Control Slide
 Run the macro from this slide.
-* Change the `values` in the `options` table to change titles, labels, and colors.
+* Change the `values` in the `options` table to change titles and labels.
 * Enter presentation mode.
 * Click the document image to open the `data.txt` file.
 * Paste the Json into `data.txt`. Save and close the file.
 * Click the `Run` button.
 
-![image](https://user-images.githubusercontent.com/413552/122657872-0f3ede80-d11c-11eb-85be-d302dc764581.png)
+![image](https://user-images.githubusercontent.com/413552/122793276-db74cd80-d26f-11eb-8900-67f26961bd52.png)
 
 
+## Slide Formatting
+* You can change the design of the slides using standard PowerPoint formatting options.
+* Beyond theme changes, you can alter the master slide by clicking `View` and `Slide Master`.
+* Celebrate uses the last layout slide on the master.  You can make changes to the title and subtitle on the Celebrate layout.
+* The Celebrate layout is expected to be the last layout in the master list.
 
 ## Workday RaaS Configuration
 
@@ -65,6 +69,9 @@ Create a Workday report to generate the json data for Celebrate.
 ## Credits
 WebHelpers
 (c) Tim Hall - https://github.com/VBA-tools/VBA-Web (MIT License)
+
+Base64Decode (for Mac)
+Antonin Foller, http://www.motobit.com
 
 Thank you to [Ellie Khorasani](https://www.linkedin.com/in/ellie-khorasani-a33581bb) for her testing feedback, contributions, and support.
 
