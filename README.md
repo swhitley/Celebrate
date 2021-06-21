@@ -32,7 +32,8 @@ This is an example of the json format that Celebrate can process.  Celebrate als
 ```
 
 ## About the Json Data
-* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg) -- or use single, forward slashes (/). 
+* `photo` can be a url, file path, or a base64-encoded image.  Use double-backslashes (\\\\) for local files on Windows (e.g. c:\\\\temp\\\\pic.jpg) -- or use single, forward slashes (/).
+* `group` can be any text, but special groups such as "1" and "0" have their own labels.  You should sort all data items by group. Celebrate will not sort the data.  For birthdays, you can use the birth month as the text for group.
   
 Note: If you are viewing the text version of this README file, you will see four backslashes when referring to `double-backslashes`. This is due to markdown requirements. A double-backslash refers to two consecutive backslashes.
 
@@ -58,6 +59,8 @@ Run the macro from this slide.
 Create a Workday report to generate the json data for Celebrate.
 
 ![image](https://user-images.githubusercontent.com/413552/122632795-e7069f80-d089-11eb-86a7-005757839e99.png)
+
+If your photos are stored outside of Workday, use a calculated field to generate the unique url for each worker photo.  Celebrate will use the generated url and will not need the base64-encoded photo data from Workday.
 
 ![image](https://user-images.githubusercontent.com/413552/122632897-7ca22f00-d08a-11eb-9413-b15471d13140.png)
 
